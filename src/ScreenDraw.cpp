@@ -50,6 +50,7 @@ void ScreenDraw::initialise()
     // Shaders
     programID = LoadShaders( "version1.vertexshader", "version1.fragmentshader" );
     
+    halfFOV = glGetUniformLocation(programID, "halfFOV");
 }
 
 void ScreenDraw::present()
@@ -64,6 +65,8 @@ void ScreenDraw::present()
     // 1st attribute buffer : vertices
     glEnableVertexAttribArray(0);
     glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+    
+    // Attrib 0
     glVertexAttribPointer(
                           0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
                           3,                  // size
@@ -72,6 +75,10 @@ void ScreenDraw::present()
                           0,                  // stride
                           (void*)0            // array buffer offset
                           );
+    
+    // Attrib 1
+    // 60 degrees, 640 x 480.
+    glUniform2f(halfFOV, 1.074f, 0.785f);
     
     // Draw the triangle !
     glDrawArrays(GL_TRIANGLES, 0, 6); // Starting from vertex 0; 2*3 vertices total -> 2 triangles

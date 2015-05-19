@@ -3,10 +3,18 @@
 // Input vertex data, different for all executions of this shader.
 layout(location = 0) in vec3 vertexPosition_modelspace;
 
+// Uniform
+uniform vec2 halfFOV;
+
+// Output
+out vec2 xy;
+
 void main(){
 
     gl_Position.xyz = vertexPosition_modelspace;
     gl_Position.w = 1.0;
 
+    xy.x = vertexPosition_modelspace.x * halfFOV.x;
+    xy.y = vertexPosition_modelspace.y * halfFOV.y;
 }
 

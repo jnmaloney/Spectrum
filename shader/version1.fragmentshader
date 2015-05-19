@@ -1,12 +1,19 @@
 #version 330 core
 
+// Input data
+in vec2 xy;
+
 // Ouput data
 out vec3 color;
 
 void main()
 {
+    // Calculate view angle
+    float sina = sin(abs(xy.x) * 0.2);
+    float sinb = sin(abs(xy.y) * 0.2);
+    float c = asin(sqrt(sina * sina + sinb * sinb));
 
-	// Output color 
-	color = vec3(0,0,1);
+	// Output color
+	color = vec3(0, c, c);
 
 }

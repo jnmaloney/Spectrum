@@ -30,6 +30,8 @@ protected:
     GLuint VertexArrayID;
     GLuint vertexbuffer;
     GLuint programID;
+    
+    GLuint halfFOV;
 };
 
 #endif /* defined(__Spectrum__ScreenDraw__) */
