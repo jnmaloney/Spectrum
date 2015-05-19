@@ -9,11 +9,9 @@ out vec3 color;
 void main()
 {
     // Calculate view angle
-    float sina = sin(abs(xy.x) * 0.2);
-    float sinb = sin(abs(xy.y) * 0.2);
-    float c = asin(sqrt(sina * sina + sinb * sinb));
+    float c = sqrt(xy.x * xy.x + xy.y * xy.y);
 
-	// Output color
+    // Output color
 	color = vec3(0, c, c);
 
 }
