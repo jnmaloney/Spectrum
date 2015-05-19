@@ -46,10 +46,7 @@ int main(int argc, const char * argv[]) {
         return -1;
     }
     
-    // ...
-    //Something* something = new Something();
-    //something->SetShaders();
-    
+    // Screen drawing object
     ScreenDraw draw;
     draw.initialise();
     
@@ -57,7 +54,6 @@ int main(int argc, const char * argv[]) {
     while (!glfwWindowShouldClose(window))
     {
         /* Render here */
-        //something->DrawFrame();
         draw.present();
         
         /* Swap front and back buffers */

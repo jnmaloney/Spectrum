@@ -11,7 +11,59 @@ void main()
     // Calculate view angle
     float c = sqrt(xy.x * xy.x + xy.y * xy.y);
 
+    // Rayleigh colour
+    vec3 rayleigh = vec3(1 - c * 0.51, 1 - c * 0.51, 0.9);
+
+    // First rainbow
+    vec3 rainbow = vec3(0, 0, 0);
+    float i = 0.7068583470577035;
+    float o = 0.7330382858376184;
+    if (i < c && c < o)
+    {
+        float d = o - i;
+        float d2 = 0.5 * d;
+
+        if (c < i + d2)
+        {
+            rainbow.b = 1.0 - (c - i) / (d2);
+            rainbow.g += (c - i) / (d2);
+        }
+
+        if (c > i + d2)
+        {
+            rainbow.r = 1.0 - (o - c) / (d2);
+            rainbow.g += (o - c) / (d2);
+        }
+
+        rainbow.rgb *= 1.0 - abs(((c - i) - d2) / d2);
+    }
+
+    // Second rainbow
+    vec3 rainbow2 = vec3(0, 0, 0);
+    i = 0.8726646259971648;
+    o = 0.9250245035569946;
+    if (i < c && c < o)
+    {
+        float d = o - i;
+        float d2 = 0.5 * d;
+
+        if (c < i + d2)
+        {
+            rainbow2.r = 1.0 - (c - i) / (d2);
+            rainbow2.g += (c - i) / (d2);
+        }
+
+        if (c > i + d2)
+        {
+            rainbow2.b = 1.0 - (o - c) / (d2);
+            rainbow2.g += (o - c) / (d2);
+        }
+
+        rainbow2.rgb *= 1.0 - abs(((c - i) - d2) / d2);
+        rainbow2.rgb *= 0.5;
+    }
+
     // Output color
-	color = vec3(0, c, c);
+	color = rayleigh + rainbow + rainbow2;
 
 }
